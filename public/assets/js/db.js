@@ -1,35 +1,28 @@
 let db;
-let budgetVersion;
+const bs = 'BudgetStore';
 
-// Create a new db request for a "budget" database.
-const request = indexedDB.open('BudgetDB', budgetVersion || 21);
+// request for a "budget" database.
+const request = indexedDB.open('budgetDB', 1);
 
 request.onupgradeneeded = (e) => {
-  console.log('Upgrade needed in IndexDB');
-
-  const { oldVersion } = e;
-  const newVersion = e.newVersion || db.version;
-
-  console.log(`DB Updated from version ${oldVersion} to ${newVersion}`);
-
   db = e.target.result;
 
-  if (db.objectStoreNames?.length) {
-    db.createObjectStore('BudgetStore', { autoIncrement: true });
-  }
+  db.createObjectStore(bs, { autoIncrement: true });
 };
 
-request.onerror = (e) => console.log(`Woops! ${e.target.errorCode}`);
+request.onerror = (e) => console.log("Error", e.target.errorCode);
 
-const checkDatabase = () =>  {
-  let transaction = db.transaction(['BudgetStore'], 'readwrite');
-  const store = transaction.objectStore('BudgetStore');
+const checkDatabase = () => {
+  // open a transaction with bs
+  let transaction = db.transaction([bs], 'readwrite');
+  // access your bs object
+  const store = transaction.objectStore(bs);
   const getAll = store.getAll();
 
-  // If the request was successful
+  // if request was successful
   getAll.onsuccess = () => {
-    // If there are items in the store, we need to bulk add them when we are back online
-    if (getAll.result) {
+    // if there are items in the store, we need to bulk add them when we are back online
+    if (getAll.result.length > 0) {
       fetch('/api/transaction/bulk', {
         method: 'POST',
         body: JSON.stringify(getAll.result),
@@ -38,15 +31,15 @@ const checkDatabase = () =>  {
           'Content-Type': 'application/json',
         },
       })
-        .then(res => res.json())
-        .then(res => {
+        .then((res) => res.json())
+        .then((res) => {
+          // if returned response is not empty
           if (res.length !== 0) {
-            transaction = db.transaction(['BudgetStore'], 'readwrite');
-
-            const currentStore = transaction.objectStore('BudgetStore');
+            // open another transaction
+            transaction = db.transaction([bs], 'readwrite');
+            const currentStore = transaction.objectStore(bs);
 
             currentStore.clear();
-            console.log('Clearing store 🧹');
           }
         });
     }
@@ -54,23 +47,18 @@ const checkDatabase = () =>  {
 }
 
 request.onsuccess = (e) => {
-  console.log('success');
   db = e.target.result;
 
-  // Check if app is online before reading from db
+  // if app is online before reading from db
   if (navigator.onLine) {
-    console.log('Backend online! 🗄️');
     checkDatabase();
   }
 };
 
 const saveRecord = (record) => {
-  console.log('Save record invoked');
-  // Create a transaction on the BudgetStore db with readwrite access
-  const transaction = db.transaction(['BudgetStore'], 'readwrite');
-  // Access your BudgetStore object store
-  const store = transaction.objectStore('BudgetStore');
-  // Add record to your store with add method.
+  transaction = db.transaction([bs], 'readwrite');
+  const store = transaction.objectStore(bs);
+
   store.add(record);
 };
 
