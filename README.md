@@ -1,9 +1,9 @@
 # Budget Tracker with Progressive Web App Features
 
-![fitness-tracker-demo](./demos/fitness-tracker-demo.gif)
+![budget-tracker-demo](./demos/budget-tracker-demo.gif)
 
 ## Overview
-Given a functional budget track app that works online, the user is tasked with giving it an additional features to ensure offline use in the form of a PWA. IndexedDB, a manifest, and a service worker script play important roles in making this possible.
+Given a functional budget track app that works online, the user is tasked with giving it an additional features to ensure offline use in the form of a PWA. IndexedDB, a web manifest, and a service worker script play important roles in making this possible.
 
 ## Table of Contents  
 1. [Pseudocode](#pseudocode)  
