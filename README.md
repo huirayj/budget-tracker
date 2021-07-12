@@ -21,6 +21,7 @@ Given a functional budget track app that works online, the user is tasked with g
 
 ## Usage
 - ```npm run start``` to start the server.
+- While using Google Chrome, click on the icon at the end of the address bar to install, the app as a PWA.
 
 ## Resources
 - [PWA](https://web.dev/progressive-web-apps/)
