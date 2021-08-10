@@ -6,10 +6,13 @@
 Given a functional budget track app that works online, the user is tasked with giving it an additional features to ensure offline use in the form of a PWA. IndexedDB, a web manifest, and a service worker script play important roles in making this possible.
 
 ## Table of Contents  
-1. [Pseudocode](#pseudocode)  
-2. [Installation](#installation) 
-3. [Usage](#usage) 
-4. [Links](#links)
+
+  - [Pseudocode](#pseudocode)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Technologies Used](#technologies-used)
+  - [Links](#links)
+  - [Resources](#resources)
 
 ## Pseudocode
 1. Create an IndexedDB script for offline storage.
@@ -21,14 +24,24 @@ Given a functional budget track app that works online, the user is tasked with g
 
 ## Usage
 - ```npm run start``` to start the server.
+- Enter a title and a corresponding numeric value.
 - While using Google Chrome, click on the icon at the end of the address bar to install, the app as a PWA.
 
+## Technologies Used
+- HTML
+- CSS
+- Javascript
+- Bootstrap
+- Express
+- Mongoose
+
+## Links
+- [Repository](https://github.com/huirayj/budget-tracker)
+- [Deployed Site](https://budget-tracker-huirayj.herokuapp.com/)
+  
 ## Resources
 - [PWA](https://web.dev/progressive-web-apps/)
 - [Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)
 - [IndexedDB API](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)
 - [Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)
 
-## Links
-- [Repository](https://github.com/huirayj/budget-tracker)
-- [Deployed Site](https://budget-tracker-huirayj.herokuapp.com/)
