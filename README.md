@@ -44,4 +44,3 @@ Given a functional budget track app that works online, the user is tasked with g
 - [Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)
 - [IndexedDB API](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)
 - [Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)
-
